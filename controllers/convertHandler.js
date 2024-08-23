@@ -1,6 +1,4 @@
 function ConvertHandler() {
-
-  const unitsMap = new Map();
   
   this.getNum = function(input) {
     let result;
