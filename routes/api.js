@@ -17,12 +17,12 @@ module.exports = function (app) {
     const spellOutReturnUnit = convertHandler.spellOutUnit(returnUnit)
     const returnNum = convertHandler.convert(initNum, initUnit);
     const string = convertHandler.getString(initNum, spellOutInitUnit, returnNum, spellOutReturnUnit);
-    console.log('input', input);
+    // console.log('input', input);
     (initNum === 'invalid number' && initUnit === 'invalid unit') ? responseMsg = 'invalid number and unit' 
       : (initNum === 'invalid number') ? responseMsg = 'invalid number' 
       : (initUnit === 'invalid unit') ? responseMsg = 'invalid unit' 
       : responseMsg = {initNum, initUnit, returnNum, returnUnit, string}
-    console.log('res',responseMsg);
+    // console.log('res',responseMsg);
     res.json(responseMsg);
   })
 
