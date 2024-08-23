@@ -1,5 +1,5 @@
 function ConvertHandler() {
-  
+
   this.getNum = function(input) {
     let result;
     if (input.includes('/')) {
@@ -104,6 +104,7 @@ function ConvertHandler() {
         result = initNum / lbsToKg;
         break;
     }
+    result = result.toFixed(5);
     return result;
   };
   
