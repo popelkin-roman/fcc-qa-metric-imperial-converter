@@ -10,6 +10,7 @@ function ConvertHandler() {
       result = parseFloat(input)
       if ( isNaN(result) ) result = 'invalid number'
     }
+    if (!/\d+/.test(input)) result = 1;
     return result;
   };
   
@@ -108,7 +109,7 @@ function ConvertHandler() {
         result = initNum / lbsToKg;
         break;
     }
-    return result?.toFixed(5);
+    return +result?.toFixed(5);
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
