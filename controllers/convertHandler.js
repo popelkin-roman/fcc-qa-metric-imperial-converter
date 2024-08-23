@@ -4,16 +4,18 @@ function ConvertHandler() {
     let result;
     if (input.includes('/')) {
       let parts = input.split('/');
-      if (parts.length > 2) throw new Error('extra /');
       result = parseFloat(parts[0]) / parseFloat(parts[1]);
+      if (parts.length > 2) result = 'invalid number';
     } else {
       result = parseFloat(input)
+      if ( isNaN(result) ) result = 'invalid number'
     }
     return result;
   };
   
   this.getUnit = function(input) {
     let result;
+    const units = ['L', 'gal', 'mi', 'km', 'lbs', 'kg'];
     let startIndex = 0;
     for (let i = input.length - 1; i >= 0; i--) {
       if (! /[a-zA-Z]/.test(input[i]) ) {
@@ -21,9 +23,9 @@ function ConvertHandler() {
         break;
       }
     }
-    result = input.substr(startIndex);
-    
-    return result;
+    let parsedText = input.substr(startIndex);
+    result = units.find( el => el.toLowerCase() === parsedText.toLowerCase())
+    return result || 'invalid unit';
   };
   
   this.getReturnUnit = function(initUnit) {
@@ -48,7 +50,7 @@ function ConvertHandler() {
         result = 'lbs';
         break;
       default:
-        result = 'error'
+        result = 'invalid unit'
     }
     return result;
   };
@@ -74,6 +76,8 @@ function ConvertHandler() {
       case 'kg':
         result = 'kilograms';
         break;
+      default:
+        result = 'invalid unit'
     }
     
     return result;
@@ -104,8 +108,7 @@ function ConvertHandler() {
         result = initNum / lbsToKg;
         break;
     }
-    result = result.toFixed(5);
-    return result;
+    return result?.toFixed(5);
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
